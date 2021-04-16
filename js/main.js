@@ -16,14 +16,6 @@ function saveBookmark(e){
     url: siteUrl
   }
 
-  /*
-    // Local Storage Test
-    localStorage.setItem('test', 'Hello World');
-    console.log(localStorage.getItem('test'));
-    localStorage.removeItem('test');
-    console.log(localStorage.getItem('test'));
-  */
-
   // Test if bookmarks is null
   if(localStorage.getItem('bookmarks') === null){
     // Init array
