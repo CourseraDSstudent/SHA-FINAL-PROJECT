@@ -77,8 +77,7 @@ function fetchBookmarks() {
     var url = bookmarks[i].url;
 
     bookmarksResults.innerHTML += '<div class="well">' +
-      '<link rel="shortcut icon" href="https://www.in.gr/favicon.ico" />' +
-      '<h3>' + name +
+      '<h3>' + name + '<img src="' + url +'favicon.ico' + '"></h3>' +
       ' <a class="btn btn-default" target="_blank" href="' + addhttp(url) + '">Visit</a> ' +
       ' <a onclick="deleteBookmark(\'' + url + '\')" class="btn btn-danger" href="#">Delete</a> ' +
       '</h3>' +
