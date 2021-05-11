@@ -6,14 +6,14 @@ document.getElementById('myForm').addEventListener('submit', saveBookmark);
 // Save Bookmark
 function saveBookmark(e) {
   // Get form values
-  var siteName = document.getElementById('siteName').value;
-  var siteUrl = document.getElementById('siteUrl').value;
+  const siteName = document.getElementById('siteName').value;
+  const siteUrl = document.getElementById('siteUrl').value;
 
   if (!validateForm(siteName, siteUrl)) {
     return false;
   }
 
-  var bookmark = {
+  const bookmark = {
     name: siteName,
     url: siteUrl
   }
@@ -21,14 +21,14 @@ function saveBookmark(e) {
   // Test if bookmarks is null
   if (localStorage.getItem('bookmarks') === null) {
     // Init array
-    var bookmarks = [];
+    const bookmarks = [];
     // Add to array
     bookmarks.push(bookmark);
     // Set to localStorage
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   } else {
     // Get bookmarks from localStorage
-    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
     // Add bookmark to array
     bookmarks.push(bookmark);
     // Re-set back to localStorage
@@ -48,9 +48,9 @@ function saveBookmark(e) {
 // Delete bookmark
 function deleteBookmark(url) {
   // Get bookmarks from localStorage
-  var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
   // Loop through the bookmarks
-  for (var i = 0; i < bookmarks.length; i++) {
+  for (let i = 0; i < bookmarks.length; i++) {
     if (bookmarks[i].url == url) {
       // Remove from array
       bookmarks.splice(i, 1);
@@ -66,23 +66,24 @@ function deleteBookmark(url) {
 // Fetch bookmarks
 function fetchBookmarks() {
   // Get bookmarks from localStorage
-  var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
   // Get output id
-  var bookmarksResults = document.getElementById('bookmarksResults');
+  const bookmarksResults = document.getElementById('bookmarksResults');
 
   // Build output
   bookmarksResults.innerHTML = '';
-  for (var i = 0; i < bookmarks.length; i++) {
-    var name = bookmarks[i].name;
-    var url = bookmarks[i].url;
+  if (bookmarks !== null) {
+  for (let i = 0; i < bookmarks.length; i++) {
+    const name = bookmarks[i].name;
+    const url = bookmarks[i].url;
 
     bookmarksResults.innerHTML += '<div class="well">' +
-      '<h3>' + name + '<img src="' + url +'favicon.ico' + '"></h3>' +
-      ' <a class="btn btn-default" target="_blank" href="' + addhttp(url) + '">Visit</a> ' +
+      '<h3>' + name + '<img src="' + url + 'favicon.ico' + '"></h3>' +
+      ' <a class="btn btn-default" target="_blank" href="' + addHTTP(url) + '">Visit</a> ' +
       ' <a onclick="deleteBookmark(\'' + url + '\')" class="btn btn-danger" href="#">Delete</a> ' +
       '</h3>' +
       '</div>';
-  }
+  }}
 }
 
 // Validate Form
@@ -92,8 +93,8 @@ function validateForm(siteName, siteUrl) {
     return false;
   }
 
-  var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-  var regex = new RegExp(expression);
+  const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  const regex = new RegExp(expression);
 
   if (!siteUrl.match(regex)) {
     alert('Please use a valid URL');
@@ -103,7 +104,7 @@ function validateForm(siteName, siteUrl) {
   return true;
 }
 
-function addhttp(url) {
+function addHTTP(url) {
   if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
     url = "http://" + url;
   }
