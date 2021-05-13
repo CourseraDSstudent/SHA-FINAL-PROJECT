@@ -1,7 +1,23 @@
+:root {
+  --color-light: black;
+  --color-dark: #262626;;
+
+  /* --foreground: var(--color-light); */
+  /* --background: var(--color-dark); */
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+#dark-mode-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -17,6 +33,7 @@ body {
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;
 }
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -46,6 +63,7 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
+
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
@@ -55,6 +73,7 @@ body {
 .marketing {
   margin: 40px 0;
 }
+
 .marketing p + h4 {
   margin-top: 28px;
 }
@@ -66,6 +85,12 @@ h3 img {
   margin-left: 10px;
 }
 
+/* Dark Mode */
+.darkmode {
+  --foreground: var(--color-light);
+  --background: var(--color-dark);
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -75,10 +100,12 @@ h3 img {
     padding-right: 0;
     padding-left: 0;
   }
+
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;

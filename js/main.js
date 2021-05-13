@@ -78,10 +78,10 @@ function fetchBookmarks() {
     const url = bookmarks[i].url;
 
     bookmarksResults.innerHTML += '<div class="well">' +
-      '<h3>' + name + '<img src="' + url + 'favicon.ico' + '"></h3>' +
+      '<h3>' + name + '</h3>' +
+      '<img src="' + url + '/favicon.ico' + '">' +
       ' <a class="btn btn-default" target="_blank" href="' + addHTTP(url) + '">Visit</a> ' +
       ' <a onclick="deleteBookmark(\'' + url + '\')" class="btn btn-danger" href="#">Delete</a> ' +
-      '</h3>' +
       '</div>';
   }}
 }
