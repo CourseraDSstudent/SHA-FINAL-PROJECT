@@ -8,6 +8,7 @@ function saveBookmark(e) {
   // Get form values
   const siteName = document.getElementById('siteName').value;
   const siteUrl = document.getElementById('siteUrl').value;
+  const siteCategory = document.getElementById('sel1').value;
 
   if (!validateForm(siteName, siteUrl)) {
     return false;
@@ -15,7 +16,8 @@ function saveBookmark(e) {
 
   const bookmark = {
     name: siteName,
-    url: siteUrl
+    url: siteUrl,
+    category: siteCategory
   }
 
   // Test if bookmarks is null
@@ -38,11 +40,16 @@ function saveBookmark(e) {
   // Clear form
   document.getElementById('myForm').reset();
 
+  // Update badge
+  updateBadge();
+
   // Re-fetch bookmarks
   fetchBookmarks();
 
   // Prevent form from submitting
   e.preventDefault();
+
+  // updateBadge();
 }
 
 // Delete bookmark
@@ -61,6 +68,8 @@ function deleteBookmark(url) {
 
   // Re-fetch bookmarks
   fetchBookmarks();
+
+  updateBadge();
 }
 
 // Fetch bookmarks
@@ -73,16 +82,27 @@ function fetchBookmarks() {
   // Build output
   bookmarksResults.innerHTML = '';
   if (bookmarks !== null) {
-  for (let i = 0; i < bookmarks.length; i++) {
-    const name = bookmarks[i].name;
-    const url = bookmarks[i].url;
+    for (let i = 0; i < bookmarks.length; i++) {
+      const name = bookmarks[i].name;
+      const url = bookmarks[i].url;
+      const category = bookmarks[i].category;
 
-    bookmarksResults.innerHTML += '<div class="well">' +
-      '<h3>' + name + '</h3>' +
-      '<img src="' + url + '/favicon.ico' + '">' +
-      ' <a class="btn btn-default" target="_blank" href="' + addHTTP(url) + '">Visit</a> ' +
-      ' <a onclick="deleteBookmark(\'' + url + '\')" class="btn btn-danger" href="#">Delete</a> ' +
-      '</div>';
+      bookmarksResults.innerHTML += '<div class="well">' +
+        '<h3>' + name + '</h3>' +
+        '<h4>' + category + '</h4>' +
+        '<img src="' + url + '/favicon.ico' + '">' +
+        ' <a class="btn btn-default" target="_blank" href="' + addHTTP(url) + '">Visit</a> ' +
+        ' <a onclick="deleteBookmark(\'' + url + '\')" class="btn btn-danger" href="#">Delete</a> ' +
+        '</div>';
+
+    //   bookmarksResults.innerHTML += `
+    // <div class="well">
+    // <h3>${name}</h3>
+    // <img src="${url}/favicon.ico" />
+    // <a class="btn btn-default" target="_blank" href=${addHTTP(url)}>Visit</a>
+    // <a onclick="${deleteBookmark(url)}" class="btn btn-danger" href = "#"> Delete</a>
+    // </div >;
+    //   `
   }}
 }
 
@@ -110,3 +130,20 @@ function addHTTP(url) {
   }
   return url;
 }
+
+
+// Update Badge value
+function updateBadge() {
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  const bookmarksLength = bookmarks.length;
+  // console.log(bookmarksLength);
+
+  let spanText = document.querySelector('.badge')
+  spanText.innerHTML = bookmarksLength;
+  // fetchBookmarks();
+}
+
+updateBadge();
+
+
+document.querySelector('#sel1').value = 'Uncategorized';

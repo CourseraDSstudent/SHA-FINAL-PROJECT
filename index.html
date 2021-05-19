@@ -24,7 +24,7 @@
     </div>
 
     <div class="jumbotron">
-      <h2>Bookmark Your Favorite Sites <span class="badge badge-primary">9</span></h2>
+      <h2>Bookmark Your Favorite Sites <span class="badge badge-primary"></span></h2>
       <form id="myForm">
         <div class="form-group">
           <label for="form-group">Site Name</label>
@@ -33,6 +33,15 @@
         <div class="form-group">
           <label for="form-group">Site URL</label>
           <input type="text" class="form-control" id="siteUrl" placeholder="Website URL">
+        </div>
+        <div class="form-group">
+          <label for="sel1">Select Category:</label>
+          <select class="form-control" id="sel1">
+            <option>Uncategorized</option>
+            <option>Sports</option>
+            <option>Web Development</option>
+            <option>Other</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
